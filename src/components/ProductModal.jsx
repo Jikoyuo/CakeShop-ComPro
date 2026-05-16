@@ -58,7 +58,7 @@ export function ProductModal({ product, onClose }) {
                target="_blank" rel="noopener">
               <Icon name="wa" size={16}/> Pesan via WhatsApp
             </a>
-            <button className="btn btn--ghost" onClick={onClose}>Lihat lainnya</button>
+            <button type="button" className="btn btn--ghost" onClick={onClose}>Lihat lainnya</button>
           </div>
         </div>
       </div>
