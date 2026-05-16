@@ -1,0 +1,90 @@
+/* ── SCROLL PROGRESS ────────────── */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  z-index: 100;
+  transition: width .1s linear;
+  box-shadow: 0 1px 6px rgba(217,119,87,.4);
+}
+
+/* ── CURSOR BLOB ────────────────── */
+.cursor-blob {
+  position: fixed; top: 0; left: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) translate3d(0,0,0);
+  transition: width .35s cubic-bezier(.2,.8,.2,1), height .35s cubic-bezier(.2,.8,.2,1), opacity .25s;
+  opacity: 0;
+}
+.cursor-blob.is-on { opacity: .42; }
+.cursor-blob.is-hover { width: 64px; height: 64px; opacity: .65; }
+.cursor-blob.is-text {
+  width: 4px; height: 28px; border-radius: 4px;
+  opacity: .7; mix-blend-mode: difference;
+  background: var(--cream);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-blob { display: none; }
+}
+
+/* ── TODAY'S BAKE PEEK ──────────── */
+.peek {
+  position: fixed; bottom: 22px; left: 22px;
+  z-index: 60;
+  width: 280px;
+  background: var(--cream);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  padding: 14px;
+  display: flex; gap: 12px;
+  transform: translateX(calc(-100% - 28px));
+  transition: transform .55s cubic-bezier(.2,.9,.2,1);
+  cursor: pointer;
+}
+.peek.is-in { transform: translateX(0); }
+.peek-img {
+  width: 64px; height: 64px; flex-shrink: 0;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.peek-img img { width: 100%; height: 100%; object-fit: cover; }
+.peek-body { flex: 1; min-width: 0; }
+.peek .tag {
+  font-size: 9.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--primary);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.peek .tag .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--primary);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+@keyframes pulse-dot { 50% { opacity: .35; transform: scale(1.4); } }
+.peek h4 {
+  margin: 4px 0 2px;
+  font-family: var(--serif); font-weight: 400; font-size: 18px; line-height: 1.1;
+  color: var(--ink);
+}
+.peek small { font-size: 11.5px; color: var(--ink-3); }
+.peek .x {
+  position: absolute; top: 6px; right: 6px;
+  width: 22px; height: 22px;
+  background: transparent; border: 0;
+  color: var(--ink-3); cursor: pointer;
+  display: grid; place-items: center;
+  border-radius: 50%;
+}
+.peek .x:hover { background: var(--bg-2); color: var(--ink); }
+@media (max-width: 560px) {
+  .peek { left: 12px; right: 12px; bottom: 12px; width: auto; }
+}
+
+/* ── MAGNETIC BTN ENABLED ────────── */
+.btn[data-mag] { will-change: transform; }

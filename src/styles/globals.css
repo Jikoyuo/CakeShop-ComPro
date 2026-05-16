@@ -1,0 +1,155 @@
+/* ── DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:        #fdf6ec;
+  --bg-2:      #f7ecd9;
+  --bg-3:      #efe1c8;
+  --paper:     #fbf2e2;
+  --ink:       #2a1810;
+  --ink-2:     #5a3a26;
+  --ink-3:     #8a6d54;
+  --mute:      #b89f82;
+  --line:      #e6d5b8;
+  --primary:   #d97757;
+  --primary-2: #b85d3e;
+  --accent:    #e8c4a0;
+  --blush:     #f4d4bf;
+  --moss:      #7d8a5a;
+  --cream:     #fff8eb;
+  --shadow-sm: 0 1px 2px rgba(74,40,20,.06), 0 2px 8px rgba(74,40,20,.04);
+  --shadow:    0 4px 12px rgba(74,40,20,.08), 0 12px 40px rgba(74,40,20,.08);
+  --shadow-lg: 0 20px 60px rgba(74,40,20,.18), 0 4px 12px rgba(74,40,20,.06);
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 40px;
+  --serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --script:'Caveat', cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* paper grain texture overlay */
+body::before {
+  content:'';
+  position: fixed; inset:0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(217,119,87,.04), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(232,196,160,.06), transparent 55%),
+    url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.09  0 0 0 0 0.06  0 0 0 .12 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  opacity: .55;
+}
+
+/* utilities */
+.container { max-width: 1320px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+.eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color: var(--ink-2);
+}
+.eyebrow::before {
+  content:''; width:24px; height:1px; background: currentColor; opacity:.5;
+}
+.display {
+  font-family: var(--serif); font-weight: 400;
+  line-height: 0.95; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.display em { font-style: italic; color: var(--primary); }
+.script { font-family: var(--script); font-style: normal; }
+
+/* button */
+.btn {
+  --b-bg: var(--ink); --b-fg: var(--cream);
+  appearance:none; border:0;
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 14px 22px;
+  background: var(--b-bg); color: var(--b-fg);
+  font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .01em;
+  border-radius: 999px; cursor: pointer;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .25s;
+  text-decoration: none; white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(42,24,16,.22); }
+.btn:active { transform: translateY(0); }
+.btn--primary { --b-bg: var(--primary); --b-fg: #fff; }
+.btn--ghost   { --b-bg: transparent; --b-fg: var(--ink); border: 1px solid var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--cream); }
+.btn .arr { transition: transform .25s; }
+.btn:hover .arr { transform: translateX(3px); }
+
+/* reveal anim */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+
+/* selection */
+::selection { background: var(--primary); color: #fff; }
+
+/* generic card */
+.card {
+  background: var(--paper);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+/* hide scrollbar but allow scroll */
+.no-bar::-webkit-scrollbar { display:none }
+.no-bar { scrollbar-width: none; }
+
+/* image placeholder gradient (used when img fails) */
+.img-fallback {
+  background:
+    radial-gradient(at 30% 30%, var(--blush), transparent 60%),
+    linear-gradient(135deg, var(--accent), var(--primary));
+}
+
+/* lock body when modal open */
+body.lock { overflow: hidden; }
+
+/* ── RESPONSIVE GLOBAL ─────────────── */
+/* Tablet */
+@media (max-width: 1024px) {
+  .container { padding: 0 24px; }
+}
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 18px; }
+}
+@media (max-width: 420px) {
+  .container { padding: 0 14px; }
+  .btn { padding: 12px 18px; font-size: 13px; }
+}
+/* Smooth fonts/clamp adjustments — make sure massive serifs feel right on tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .display, h1, h2, h3 { letter-spacing: -.018em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  .ticker-track, .testi-track { animation: none !important; }
+}
+/* high-density displays — sharpen img rendering */
+@media (min-resolution: 2dppx) {
+  img { image-rendering: -webkit-optimize-contrast; }
+}
