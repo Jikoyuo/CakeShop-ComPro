@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Icon } from './Icon';
 import { useScrollY } from '../hooks/useScrollY';
+import { useBodyLock } from '../hooks/useBodyLock';
 
 const NAV_ITEMS = [
   { href: '#story',     label: 'Cerita' },
@@ -16,9 +17,7 @@ export function Nav() {
   const y = useScrollY();
   const scrolled = y > 40;
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    document.body.classList.toggle('lock', open);
-  }, [open]);
+  useBodyLock(open);
   return (
     <>
       <div className={'nav-wrap ' + (scrolled ? 'is-scrolled' : '')}>

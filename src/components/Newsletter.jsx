@@ -38,8 +38,9 @@ export function Newsletter() {
               <>
                 <div className="news-row">
                   <input
-                    type="email"
+                    type="text"
                     required
+                    autoComplete="name"
                     className="news-input"
                     placeholder="Nama Anda"
                   />

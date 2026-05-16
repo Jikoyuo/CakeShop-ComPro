@@ -236,9 +236,11 @@
   display: grid; place-items: center;
   padding: 24px;
   animation: fade .25s ease;
+  overscroll-behavior: contain;
 }
 @keyframes fade { from { opacity: 0; } }
 .modal {
+  position: relative;
   width: min(960px, 100%);
   max-height: 90vh;
   background: var(--paper);
@@ -248,14 +250,27 @@
   grid-template-columns: 1.05fr 1fr;
   box-shadow: var(--shadow-lg);
   animation: pop .4s cubic-bezier(.2,.9,.2,1);
+  overscroll-behavior: contain;
 }
 @keyframes pop { from { opacity: 0; transform: scale(.94) translateY(10px); } }
 @media (max-width: 760px) {
-  .modal { grid-template-columns: 1fr; max-height: 92vh; overflow-y: auto; border-radius: var(--r-lg); }
+  .modal {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: var(--r-lg);
+    -webkit-overflow-scrolling: touch;
+  }
   .modal-body { padding: 26px 22px; }
   .modal-img { aspect-ratio: 3/2; }
   .modal h3 { font-size: 32px; }
   .modal .price-large { font-size: 26px; }
+  .modal-overlay { padding: 12px; }
+}
+@media (max-width: 420px) {
+  .modal-body { padding: 22px 18px 26px; }
+  .modal h3 { font-size: 28px; }
+  .modal-close { top: 10px; right: 10px; width: 34px; height: 34px; }
 }
 .modal-img { position: relative; aspect-ratio: 4/5; overflow: hidden; }
 .modal-img img { width: 100%; height: 100%; object-fit: cover; }

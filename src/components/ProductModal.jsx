@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react';
 import { Icon } from './Icon';
 import { CakeImg } from './CakeImg';
 import { fmtIDR } from '../utils/format';
+import { useBodyLock } from '../hooks/useBodyLock';
 
 export function ProductModal({ product, onClose }) {
   const [size, setSize] = useState(product?.sizes?.[0] || '');
+  useBodyLock(!!product);
+  useEffect(() => {
+    if (product) setSize(product.sizes?.[0] || '');
+  }, [product]);
   useEffect(() => {
     if (!product) return;
-    document.body.classList.add('lock');
     const k = (e) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', k);
-    return () => { document.body.classList.remove('lock'); window.removeEventListener('keydown', k); };
+    return () => window.removeEventListener('keydown', k);
   }, [product, onClose]);
   if (!product) return null;
 
