@@ -31,7 +31,7 @@ export function ProductModal({ product, onClose }) {
         <div className="modal-body">
           <div className="ttl">{product.tagline}</div>
           <h3>{product.name}</h3>
-          <p className="story">{product.story}</p>
+          <p className="modal-story">{product.story}</p>
 
           <div className="eyebrow" style={{ marginBottom: 10 }}>Pilih ukuran</div>
           <div className="size-pills">

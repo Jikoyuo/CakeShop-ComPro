@@ -29,7 +29,11 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin:0; padding:0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
 body {
   background: var(--bg);
   color: var(--ink);
@@ -39,6 +43,8 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
 /* paper grain texture overlay */
@@ -120,8 +126,15 @@ body::before {
     linear-gradient(135deg, var(--accent), var(--primary));
 }
 
-/* lock body when modal open */
-body.lock { overflow: hidden; }
+/* lock body when modal/drawer open — uses position:fixed for iOS Safari */
+body.lock {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: var(--lock-top, 0);
+  left: 0;
+  right: 0;
+}
 
 /* ── RESPONSIVE GLOBAL ─────────────── */
 /* Tablet */

@@ -23,12 +23,12 @@
   font-size: 17px; color: var(--ink-2); line-height: 1.7;
   max-width: 52ch;
 }
-.story-text .signature {
+.story-text .author-sig {
   margin-top: 32px;
   font-family: var(--script); font-size: 38px;
   color: var(--ink); line-height: 1;
 }
-.story-text .signature small {
+.story-text .author-sig small {
   display: block; font-family: var(--sans);
   font-size: 11px; color: var(--ink-3); letter-spacing: .16em; text-transform: uppercase; margin-top: 6px;
 }
@@ -280,7 +280,7 @@
   border-top: 1px solid var(--line); padding-top: 18px;
 }
 .modal .price-large small { display: block; font-family: var(--sans); font-size: 11px; color: var(--ink-3); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 4px; }
-.modal p.story { color: var(--ink-2); line-height: 1.65; margin: 14px 0 22px; }
+.modal p.modal-story { color: var(--ink-2); line-height: 1.65; margin: 14px 0 22px; }
 .size-pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 24px; }
 .size-pills label {
   display: inline-flex; gap: 8px; align-items: center;

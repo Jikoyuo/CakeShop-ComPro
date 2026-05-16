@@ -28,7 +28,7 @@ export function Story() {
               <div className="pill"><Icon name="flame" size={14}/> Fresh bake harian</div>
               <div className="pill"><Icon name="sparkle" size={14}/> By-order, no stok</div>
             </div>
-            <div className="signature">
+            <div className="author-sig">
               — Dhimas R.
               <small>Founder & head baker</small>
             </div>
